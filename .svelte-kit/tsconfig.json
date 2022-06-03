@@ -1,7 +1,20 @@
 {
 	"compilerOptions": {
 		"baseUrl": "..",
-		"paths": {},
+		"paths": {
+			"$lib": [
+				"src/lib"
+			],
+			"$lib/*": [
+				"src/lib/*"
+			],
+			"$styles": [
+				"src/lib/styles"
+			],
+			"$styles/*": [
+				"src/lib/styles/*"
+			]
+		},
 		"rootDirs": [
 			"..",
 			"./types"
