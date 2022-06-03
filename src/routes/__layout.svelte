@@ -2,5 +2,6 @@
   import "$styles/globals.css";
 </script>
 
-
-<slot />
+<div>
+  <slot />
+</div>

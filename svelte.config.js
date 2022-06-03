@@ -16,15 +16,6 @@ const config = {
 			$components: path.resolve("src/lib/components"),
 			$posts: path.resolve("src/posts"),
 		},
-
-		prerender: {
-			default: true,
-		},
-
-		browser: {
-			hydrate: true,
-			router: true,
-		},
 	},
 
 	preprocess: preprocess({
