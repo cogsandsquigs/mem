@@ -1,4 +1,12 @@
 <script lang="ts">
+  import Reminder from "$lib/components/Reminder.svelte";
 </script>
 
-<h1 class="text-center">mem</h1>
+<div class="">
+  <h1>mem</h1>
+  <Reminder
+    {...{
+      name: "reminder",
+    }}
+  />
+</div>

@@ -7,11 +7,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#111827",
-        secondary: "#3ABFF8",
-        accent: "#2563EB",
-        neutral: "#111827",
-        "base-100": "#111827",
+        primary: "#111127",
+        secondary: "#6d28d9",
+        accent: "#4338ca",
+        neutral: "#111127",
+        "base-100": "#111127",
         info: "#3ABFF8",
         success: "#36D399",
         warning: "#FBBD23",

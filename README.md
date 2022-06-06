@@ -1,3 +1,3 @@
 # mem
 
-A memorization app (made with SvelteKit) that uses the leitner system.
+A reminder/to-do app for me ig
