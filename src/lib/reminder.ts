@@ -1,6 +1,18 @@
 import { writable } from "svelte/store"
 
-export const destroyIds = writable()
-export function destroy(id: number) {
-	destroyIds.set(id)
+// doing this to assert type for reminders
+let l: number[] = []
+export const reminders = writable(l)
+
+export function add(id: number) {
+	reminders.update((ids) => {
+		ids.push(id)
+		return ids
+	})
+}
+
+export function remove(id: number) {
+	reminders.update((ids) => {
+		ids.filter((x: number) => x !== id)
+	})
 }

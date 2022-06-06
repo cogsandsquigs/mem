@@ -2,22 +2,14 @@
   import dayjs from "dayjs";
   import relativeTime from "dayjs/plugin/relativeTime";
   dayjs.extend(relativeTime);
-
-  import { destroy, destroyIDs } from "$lib/reminder";
-
-  destroyIDs.subscribe(ids => {});
+  import { onMount, onDestroy } from "svelte";
+  import { reminders, add, remove } from "$lib/reminder";
 
   // not needed (yet)
   // import utc from "dayjs/plugin/utc";
   // import timezone from "dayjs/plugin/timezone"; // dependent on utc plugin
   // dayjs.extend(utc);
   // dayjs.extend(timezone);
-
-  // gets the top level node for this
-  // component, allows for it to be destroyed.
-  let nodeRef;
-  // checks if the checkbox is checked
-  let checked;
 
   $: red = dayjs(time).unix() - dayjs().unix() < 1 ? "color: red;" : "";
 
@@ -37,6 +29,24 @@
       : "MM/DD/YYYY, hh:mm a";
   // the delay until the timer is destroyed
   export let timerDestroyDelay: number = 3000;
+
+  // gets the top level node for this
+  // component, allows for it to be destroyed.
+  let nodeRef;
+  // checks if the checkbox is checked
+  let checked;
+
+  onMount(() => {
+    add(id);
+
+    reminders.subscribe(ids => {
+      exist = ids.filter(x => x === id);
+      if (exist.length <= 0) {
+        alert("test");
+        nodeRef.parentNode.removeChild(nodeRef);
+      }
+    });
+  });
 </script>
 
 <!-- get the top-level component -->
@@ -53,7 +63,7 @@
         // time, destroy it.
         if (checked) {
           // tell the app that this reminder is gone
-          destroy(id)
+          remove(id)
        }
         // TODO: reset timer if checked in the
         // middle of waiting for timer to go off
