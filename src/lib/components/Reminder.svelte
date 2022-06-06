@@ -1,18 +1,15 @@
 <script lang="ts">
   import dayjs from "dayjs";
   // not needed (yet)
-  /*
-  import utc from "dayjs/plugin/utc";
-  import timezone from "dayjs/plugin/timezone"; // dependent on utc plugin
-  dayjs.extend(utc);
-  dayjs.extend(timezone);
-  */
+  // import utc from "dayjs/plugin/utc";
+  // import timezone from "dayjs/plugin/timezone"; // dependent on utc plugin
+  // dayjs.extend(utc);
+  // dayjs.extend(timezone);
 
   export let name: string = "..."; // the name of the reminder
   export let time: number | dayjs.Dayjs | Date = dayjs()
     .hour(dayjs().hour() + 1)
     .minute(Math.round(dayjs().minute() / 5) * 5); // the unix timestamp of the time when the reminder happens
-  export let priority: "low" | "medium" | "high" = "medium";
   export let format: string =
     dayjs(time).date() === dayjs().date() &&
     dayjs(time).month() === dayjs().month()
@@ -20,23 +17,25 @@
       : "MM/DD/YYYY, hh:mm a";
 </script>
 
-<div class="flex items-center p-2">
-  <input
-    type="checkbox"
-    class="mx-2 w-6 h-6 rounded-full bg-secondary checked:bg-accent accent focus:outline-none border-none cursor-pointer"
-  />
-  <label for={name} class="text-4xl m-0">
-    {name}
-    <span class="text-xl opacity-80">
-      {dayjs(time).format(format)}
-    </span>
+<div>
+  <label for={name} class="flex items-center p-2">
+    <input
+      type="checkbox"
+      class="mx-2 w-6 h-6 rounded-full bg-secondary !focus:outline-none !outline-none accent-accent border-none cursor-pointer"
+    />
+    <p class="m-0">
+      <span class="text-4xl">
+        {name}
+      </span>
+      <span class="text-xl opacity-80">
+        {dayjs(time).format(format)}
+      </span>
+    </p>
   </label>
 </div>
 
 <style>
   input[type="checkbox"] {
-    user-select: none;
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: transparent;
+    accent-color: red;
   }
 </style>
