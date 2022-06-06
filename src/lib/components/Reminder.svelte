@@ -32,21 +32,9 @@
 
   // gets the top level node for this
   // component, allows for it to be destroyed.
-  let nodeRef;
+  let nodeRef: any;
   // checks if the checkbox is checked
-  let checked;
-
-  onMount(() => {
-    add(id);
-
-    reminders.subscribe(ids => {
-      exist = ids.filter(x => x === id);
-      if (exist.length <= 0) {
-        alert("test");
-        nodeRef.parentNode.removeChild(nodeRef);
-      }
-    });
-  });
+  let checked: boolean;
 </script>
 
 <!-- get the top-level component -->
@@ -55,24 +43,21 @@
     <input
       type="checkbox"
       class="mx-2 w-6 h-6 rounded-full bg-secondary !focus:outline-none !outline-none accent-accent border-none cursor-pointer"
-      bind:checked={checked}
+      bind:checked
       on:click={async () => {
         // wait 3 seconds if user doesn't want to destroy this
-        await new Promise(r => setTimeout(r, timerDestroyDelay));
+        await new Promise((r) => setTimeout(r, timerDestroyDelay));
         // if the reminder is checked by this
         // time, destroy it.
         if (checked) {
           // tell the app that this reminder is gone
-          remove(id)
-       }
+          remove(id);
+        }
         // TODO: reset timer if checked in the
         // middle of waiting for timer to go off
       }}
     />
-    <p
-      style={(checked ? "opacity: 0.65;" : "") + red}
-      class="m-0"
-    >
+    <p style={(checked ? "opacity: 0.65;" : "") + red} class="m-0">
       <span class="text-4xl">
         {name}
       </span>
@@ -82,4 +67,3 @@
     </p>
   </label>
 </div>
-
