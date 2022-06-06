@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  font-family: "Inter", "system-ui", "sans-serif";
+
+  /* apply tailwind css styles */
+  @apply prose prose-invert bg-primary max-w-none;
+}

@@ -1,8 +1,6 @@
 import adapter from "@sveltejs/adapter-static";
 import preprocess from "svelte-preprocess";
 import path from "path";
-import autoprefixer from "autoprefixer";
-import tailwindcss from "tailwindcss";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -11,7 +9,11 @@ const config = {
   kit: {
     // Default SvelteKit options
     // target: "#svelte",
-    adapter: adapter(),
+    adapter: adapter({ out: "build" }),
+
+    prerender: {
+      default: true,
+    },
 
     alias: {
       $styles: path.resolve("src/lib/styles"),
