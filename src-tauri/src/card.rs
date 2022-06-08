@@ -1,3 +1,4 @@
+use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use std::{
     collections::hash_map::DefaultHasher,
@@ -5,13 +6,14 @@ use std::{
 };
 use tauri::command;
 
-#[derive(Hash, Serialize, Deserialize, Debug)]
+#[derive(Hash, Serialize, Deserialize, Debug, Clone)]
 pub struct Card {
     id: u64,
-    topic: String, // the cards' topic
-    front: String, // the cards' front face, as a markdown string
-    back: String,  // the cards' back face, as a markdown string
-    bucket: u64,   // the bucket the card is in - used for the leitner system
+    topic: String,               // the cards' topic
+    front: String,               // the cards' front face, as a markdown string
+    back: String,                // the cards' back face, as a markdown string
+    bucket: u64,                 // the bucket the card is in - used for the leitner system
+    date_created: DateTime<Utc>, // the card's creation date
 }
 
 impl Card {
@@ -22,6 +24,7 @@ impl Card {
             front,
             back,
             bucket,
+            date_created: Utc::now(),
         };
         card.set_id();
         return card;
@@ -33,14 +36,4 @@ impl Card {
         self.hash(&mut s);
         self.id = s.finish()
     }
-}
-
-#[command]
-pub fn get_all_cards() -> Vec<Card> {
-    return vec![Card::new(
-        "Calculus".into(),
-        "limit of sin(x)/x as x -> 0".into(),
-        "1".into(),
-        0,
-    )];
 }

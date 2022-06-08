@@ -7,9 +7,6 @@
 
   // where all the logic goes
   onMount(async () => {
-    let reminders = await invoke("get_all_cards");
-    console.log(reminders);
-
     // listen to the `click` event and get a function to remove the event listener
     // there's also a `once` function that subscribes to an event and automatically unsubscribes the listener on the first event
     const unlisten = await listen("add-card", (event) => {
@@ -19,7 +16,12 @@
 
     // emits the `click` event with the object payload
     emit("add-card", {
-      theMessage: "Tauri is awesome!",
+      id: 0,
+      topic: "", // the cards' topic
+      front: "", // the cards' front face, as a markdown string
+      back: "", // the cards' back face, as a markdown string
+      bucket: 0, // the bucket the card is in - used for the leitner system
+      date_created: "",
     });
   });
 </script>
